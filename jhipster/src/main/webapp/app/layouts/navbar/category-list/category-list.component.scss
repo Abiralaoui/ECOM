@@ -1,0 +1,23 @@
+/* Styles pour le popup de catégories */
+.category-popup {
+  position: relative;
+  display: inline-block;
+}
+
+.category-popup a {
+  display: block;
+}
+
+.category-popup app-category-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: red;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.category-popup:hover app-category-list {
+  display: block;
+}

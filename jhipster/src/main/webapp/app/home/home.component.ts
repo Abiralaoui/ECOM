@@ -33,4 +33,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+  images: string[] = [
+    '../../../content/images/homepage.png',
+    '../../../content/images/home1.png',
+    '../../../content/images/home2.png',
+    ];
+
 }

@@ -13,7 +13,9 @@ h3,
 h4 {
   font-weight: 300;
 }
-
+body{
+  background-color: white;
+}
 /* Increase contrast of links to get 100% on Lighthouse Accessability Audit. Override this color if you want to change the link color, or use a Bootswatch theme */
 a {
   color: #533f03;
@@ -107,7 +109,7 @@ Generic styles
 }
 
 .footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  border-top:  2px  solid rgba(0, 0, 0, 0.125) ;
 }
 
 .hand,
@@ -235,5 +237,6 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
       margin-left: 0.5em;
     }
   }
+
 }
 /* jhipster-needle-scss-add-main JHipster will add new css style */

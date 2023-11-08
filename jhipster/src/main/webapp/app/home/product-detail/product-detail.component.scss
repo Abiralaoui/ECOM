@@ -1,0 +1,76 @@
+/* Style de la liste des produits en grille */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Style de chaque élément de la liste de produits dans la grille */
+.product-item {
+  flex-basis: calc(20% - 20px); /* 20% de largeur avec un espace de 20px entre les éléments (5 produits par ligne) */
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative; /* Permet de positionner le bouton dans cet élément */
+
+  /* Style de l'image du produit */
+  img {
+    max-width: 100%; /* Agrandir la taille de l'image pour remplir la largeur de l'élément */
+    max-height: 200px; /* Ajuster la hauteur comme souhaité */
+    margin: 0 auto 10px; /* Centrer l'image verticalement avec un espace en dessous */
+    transition: transform 0.2s, opacity 0.2s; /* Animation de transition pour l'effet hover et l'opacité */
+  }
+
+  /* Griser le contenu de l'image lors de la sélection du produit */
+  .product-item.selected img {
+    filter: grayscale(100%); /* Griser l'image */
+    opacity: 0.6; /* Appliquer une opacité pour cacher l'image */
+  }
+
+  /* Style du bouton "Buy Now" */
+  /* Style du bouton "Buy Now" */
+  .buy-button {
+    position: absolute;
+    bottom: 10px; /* Position du bouton en bas de l'élément */
+    left: 50%; /* Centrer horizontalement */
+    transform: translateX(-50%); /* Centrer le bouton horizontalement */
+    display: none; /* Initialement caché */
+    background-color: #fff; /* Couleur de fond blanche */
+    color: #888; /* Couleur du texte en gris */
+    padding: 5px 10px;
+    border: 1px solid #888; /* Bordure grise */
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+}
+/* Lorsque le bouton est survolé, changez la couleur de fond en jaune */
+/* Lorsque le bouton est survolé, changez la couleur de fond en jaune, le texte en blanc et la bordure */
+.product-item .buy-button:hover {
+  background-color: #3367c7; /* Fond jaune */
+  color: #fff; /* Texte blanc */
+  border: 2px solid #fff; /* Bordure plus grande en blanc */
+}
+.sale-label {
+  background-color: #ff0000; /* Couleur de fond rouge */
+  color: #fff; /* Texte en blanc */
+  padding: 4px 8px; /* Espacement autour de l'étiquette */
+  border-radius: 5px; /* Coins arrondis */
+  position: absolute; /* Position absolue pour superposer l'étiquette sur l'image */
+  top: 10px; /* Position en haut de l'image */
+  right: 10px; /* Position à droite de l'image */
+}
+
+
+/* Lorsque l'image est survolée, afficher le bouton "Buy Now" */
+.product-item:hover img {
+  transform: scale(1.1); /* Agrandir légèrement l'image au survol */
+}
+
+.product-item:hover .buy-button {
+  display: block; /* Afficher le bouton au survol */
+}

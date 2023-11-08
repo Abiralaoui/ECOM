@@ -1,0 +1,15 @@
+<div class="cart-sidebar" [class.active]="showCartSidebar" style="margin: 126px 20px 0; min-height: 100px;">
+  <div class="sidebar-content test">
+    <a class="back-to-home" routerLink="/">
+      <fa-icon class="large-arrow-icon" icon="arrow-left"></fa-icon>
+    </a>
+    <h3 style="margin-top: 20px;">Votre Panier</h3>
+    <div *ngIf="product">
+      <h3 style="background-color: #343a40">{{ product.nom }}</h3>
+      <p>{{ product.prix | currency }}</p>
+      <div> {{product.image}}</div>
+
+      <!-- Autres détails du produit -->
+    </div>
+  </div>
+</div>

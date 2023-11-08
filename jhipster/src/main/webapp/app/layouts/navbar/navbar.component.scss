@@ -4,6 +4,14 @@
 /* ==========================================================================
 Navbar
 ========================================================================== */
+.navbar {
+  background-color: white;
+  padding: 0.2rem 1rem;
+  position: fixed; /* Fixe la barre de navigation en haut de la page */
+  width: 100%; /* Occupe toute la largeur de la page */
+  top: 0; /* Position en haut de la page */
+  z-index: 1000; /* Z-index pour s'assurer qu'il est au-dessus du reste du contenu */
+}
 
 .navbar-version {
   font-size: 0.65em;
@@ -15,22 +23,44 @@ Navbar
   width: 1.75em;
 }
 
-.navbar {
-  padding: 0.2rem 1rem;
-
-  a.nav-link {
-    font-weight: 400;
-  }
+.navbar a.nav-link {
+  font-weight: 400;
+  color: rgba(56, 56, 56, 0.99);
+  font-size: 15px;
 }
 
 /* ==========================================================================
 Logo styles
-========================================================================== */
+====================================================================  ====== */
 .logo-img {
-  height: 45px;
-  width: 45px;
+  height: 80px;
+  width: 94px;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../../content/images/logo-jhipster.png') no-repeat center center;
+  background: url('../../../content/images/babylogo.png') no-repeat center center;
   background-size: contain;
 }
+/* CSS pour afficher la barre latérale à gauche */
+.cart-sidebar-left {
+  position: fixed;
+  top: 0;
+  left: -300px; /* Masqué initialement à gauche de la page */
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  z-index: 999;
+  transition: left 0.3s;
+}
+
+/* Ajoutez le style du contenu et du bouton de fermeture comme précédemment */
+.cart-sidebar-left .sidebar-content {
+  padding: 20px;
+}
+
+.cart-sidebar-left .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+

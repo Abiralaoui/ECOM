@@ -21,3 +21,29 @@ Main page styles
     background-size: contain;
   }
 }
+.carousel-with-margin {
+  margin-left: 20px; /* Ajustez la valeur de la marge à gauche selon vos besoins */
+}
+/* Ajouter ces styles à votre fichier CSS ou balise <style> si nécessaire */
+.carousel-control-prev, .carousel-control-next {
+  font-size: 30px; /* Ajustez la taille selon vos préférences */
+  color: #000; /* Couleur des flèches */
+  background: rgba(255, 255, 255, 0.5); /* Couleur de fond des flèches */
+  border-radius: 50%; /* Rendre les flèches circulaires */
+  width: 50px; /* Largeur des flèches */
+  height: 50px; /* Hauteur des flèches */
+  line-height: 50px; /* Ajuster la ligne centrale verticalement */
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: #000; /* Couleur des flèches */
+}
+/* styles.css (ou .scss) */
+
+.product-list-container {
+  margin-top: 20px; /* Marge en haut */
+  margin-right: 20px; /* Marge à droite */
+  margin-bottom: 20px; /* Marge en bas */
+  margin-left: 20px; /* Marge à gauche */
+}
+

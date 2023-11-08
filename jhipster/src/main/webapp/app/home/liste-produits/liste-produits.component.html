@@ -1,0 +1,16 @@
+<div>
+<!--  <h2 style="color: #343a40; font-size: xx-large">Liste des Produits</h2>-->
+  <div class="product-grid">
+    <div class="product-item" *ngFor="let product of products" [ngClass]="{ 'selected': product.selected }" (click)="onProductSelectedproduct(product)">
+      <img [src]="product.image" alt="{{ product.nom }}">
+      <p>{{ product.nom }}</p>
+      <p class="price">{{ product.prix | currency }}</p>
+      <!-- Vérifiez si le mot "solde" est présent dans la description -->
+      <ng-container *ngIf="product.description && product.description.toLowerCase().includes('solde')">
+        <span class="sale-label">Solde</span>
+      </ng-container>
+      <p>{{ product.description }}</p>
+      <button class="buy-button" (click)="onProductSelected(product)">Buy Now</button>
+    </div>
+  </div>
+</div>
