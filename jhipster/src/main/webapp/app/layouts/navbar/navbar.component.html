@@ -17,6 +17,7 @@
       <fa-icon icon="bars"></fa-icon>
     </a>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
+      <app-search-bar></app-search-bar>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
@@ -27,22 +28,23 @@
           </a>
         </li>
         <jhi-filter>test </jhi-filter>
-<!--        <a class="nav-link" [routerLink]="['/cart']" (click)="collapseNavbar()">-->
-<!--          <span>-->
-<!--            <fa-icon icon="shopping-cart"></fa-icon>-->
-<!--            <span>Panier</span>-->
-<!--          </span>-->
-<!--        </a>-->
-       <jhi-filter style="background-color: #343a40">tetetetetttt</jhi-filter>
+        <a class="nav-link" [routerLink]="['/cart']" (click)="collapseNavbar()">
+          <span>
+            <fa-icon icon="shopping-cart"></fa-icon>
+            <span>Panier</span>
+          </span>
+        </a>
 
-<!--        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">-->
-<!--          <a class="nav-link" (click)="toggleCategoryList()">-->
-<!--          <span>-->
-<!--            <fa-icon icon="search"></fa-icon>-->
-<!--            <span> Category</span>-->
-<!--          </span>-->
-<!--          </a>-->
-<!--        </li>-->
+
+
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link  " (click)="toggleCategoryList()">
+          <span>
+            <fa-icon icon="search"></fa-icon>
+            <span> Category</span>
+          </span>
+          </a>
+        </li>
 
 
         <div class="category-popup" *ngIf="showCategoryList">

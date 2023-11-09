@@ -1,0 +1,148 @@
+<div>
+  <h2 id="page-heading" data-cy="CommandeHeading">
+    <span jhiTranslate="mainApp.commande.home.title">Commandes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="mainApp.commande.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-commande"
+        [routerLink]="['/commande/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="mainApp.commande.home.createLabel"> Créer un nouveau Commande </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="mainApp.commande.home.search">Recherche pour Commande</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'mainApp.commande.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="commandes?.length === 0">
+    <span jhiTranslate="mainApp.commande.home.notFound">Aucun Commande trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="commandes && commandes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <div class="d-flex">
+              <span jhiTranslate="mainApp.commande.date">Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="etat">
+            <div class="d-flex">
+              <span jhiTranslate="mainApp.commande.etat">Etat</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="typePayement">
+            <div class="d-flex">
+              <span jhiTranslate="mainApp.commande.typePayement">Type Payement</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="carteBancaire.id">
+            <div class="d-flex">
+              <span jhiTranslate="mainApp.commande.carteBancaire">Carte Bancaire</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="client.id">
+            <div class="d-flex">
+              <span jhiTranslate="mainApp.commande.client">Client</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let commande of commandes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/commande', commande.id, 'view']">{{ commande.id }}</a>
+          </td>
+          <td>{{ commande.date | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'mainApp.EtatCommande.' + commande.etat }}">{{ commande.etat }}</td>
+          <td jhiTranslate="{{ 'mainApp.TypePayement.' + commande.typePayement }}">{{ commande.typePayement }}</td>
+          <td>
+            <div *ngIf="commande.carteBancaire">
+              <a [routerLink]="['/carte-bancaire', commande.carteBancaire.id, 'view']">{{ commande.carteBancaire.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="commande.client">
+              <a [routerLink]="['/client', commande.client.id, 'view']">{{ commande.client.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/commande', commande.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/commande', commande.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(commande)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

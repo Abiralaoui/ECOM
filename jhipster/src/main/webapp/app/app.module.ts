@@ -28,6 +28,8 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { CategoryListComponent } from './layouts/navbar/category-list/category-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {CartComponent} from "./shared/cart/cart.component";
+import {SearchBarComponent} from "./shared/search-bar/search-bar.component";
+import {FiltersComponent} from "./shared/filters/filters.component";
 
 
 @NgModule({
@@ -40,19 +42,22 @@ import {CartComponent} from "./shared/cart/cart.component";
     // jhipster-needle-angular-add-module JHipster will add new module here
     AppRoutingModule,
     // Set this to true to enable service worker (PWA)
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: false}),
     HttpClientModule,
-    NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
+    NgxWebstorageModule.forRoot({prefix: 'jhi', separator: '-', caseSensitive: true}),
     TranslationModule,
   ],
   providers: [
     Title,
-    { provide: LOCALE_ID, useValue: 'fr' },
-    { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
+    {provide: LOCALE_ID, useValue: 'fr'},
+    {provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter},
     httpInterceptorProviders,
   ],
-    declarations: [MainComponent, CartComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, CategoryListComponent],
+  declarations: [MainComponent, CartComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, CategoryListComponent, SearchBarComponent, FiltersComponent],
   bootstrap: [MainComponent],
+  exports: [
+    FiltersComponent
+  ]
 })
 export class AppModule {
   constructor(applicationConfigService: ApplicationConfigService, iconLibrary: FaIconLibrary, dpConfig: NgbDatepickerConfig) {

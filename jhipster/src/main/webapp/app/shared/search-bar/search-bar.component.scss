@@ -1,0 +1,22 @@
+/* search-bar.component.css */
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+ // background-color: #ccc; /* Couleur de fond grise */
+  border-radius: 20px; /* Bord arrondi */
+  padding: 10px; /* Padding plus large */
+  width: 300px;
+}
+
+.search-icon {
+  margin-right: 10px; /* Espace entre l'icône et le champ de recherche */
+}
+
+input {
+  width: 200px;
+  padding: 8px; /* Augmentez la taille du padding */
+  border: none; /* Supprime la bordure du champ de recherche */
+  border-radius: 20px; /* Bord arrondi pour le champ de recherche */
+  background-color: white; /* Couleur de fond du champ de recherche */
+}

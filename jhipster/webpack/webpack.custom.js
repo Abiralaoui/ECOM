@@ -30,7 +30,7 @@ module.exports = async (config, options, targetOptions) => {
         },
       }),
       new WebpackNotifierPlugin({
-        title: 'ECOM',
+        title: 'Main',
         contentImage: path.join(__dirname, 'logo-jhipster.png'),
       })
     );

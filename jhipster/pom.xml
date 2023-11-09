@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mycompany.myapp</groupId>
-    <artifactId>ecom</artifactId>
+    <artifactId>main</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>ECOM</name>
-    <description>Description for ECOM</description>
+    <name>Main</name>
+    <description>Description for main</description>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->
@@ -34,7 +34,7 @@
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <start-class>com.mycompany.myapp.EcomApp</start-class>
+        <start-class>com.mycompany.myapp.MainApp</start-class>
         <argLine>-Djava.security.egd=file:/dev/./urandom -Xmx1G</argLine>
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
         <run.addResources>false</run.addResources>
@@ -55,9 +55,8 @@
         <!-- The liquibase version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
         <liquibase.version>4.15.0</liquibase.version>
+        <liquibase-hibernate5.version>4.15.0</liquibase-hibernate5.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
-        <commons-beanutils.version>1.9.4</commons-beanutils.version>
-        <blockhound-junit-platform.version>1.0.6.RELEASE</blockhound-junit-platform.version>
         <jaxb-runtime.version>4.0.0</jaxb-runtime.version>
         <archunit-junit5.version>0.22.0</archunit-junit5.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
@@ -89,6 +88,7 @@
         <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
         <properties-maven-plugin.version>1.1.0</properties-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+        <awaitility.version>4.2.0</awaitility.version>
 
         <!-- jhipster-needle-maven-property -->
     </properties>
@@ -110,25 +110,22 @@
         <dependency>
             <groupId>tech.jhipster</groupId>
             <artifactId>jhipster-framework</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-webmvc</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-jaxb-annotations</artifactId>
         </dependency>
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>${commons-beanutils.version}</version>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate5</artifactId>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -139,8 +136,18 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-webflux-core</artifactId>
+            <artifactId>springdoc-openapi-webmvc-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -149,6 +156,18 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jcache</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -195,7 +214,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-r2dbc</artifactId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
@@ -203,17 +222,24 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-tcnative-boringssl-static</artifactId>
-            <scope>runtime</scope>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -233,7 +259,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -248,12 +274,6 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.projectreactor.tools</groupId>
-            <artifactId>blockhound-junit-platform</artifactId>
-            <version>${blockhound-junit-platform.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -272,7 +292,11 @@
         </dependency>
         <dependency>
             <groupId>org.zalando</groupId>
-            <artifactId>problem-spring-webflux</artifactId>
+            <artifactId>problem-spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -286,20 +310,12 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
-            <scope>compile</scope>
+            <scope>runtime</scope>
         </dependency>
         <!-- Spring Cloud -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-data</artifactId>
         </dependency>
         <dependency>
             <groupId>io.micrometer</groupId>
@@ -592,7 +608,7 @@
                             </platforms>
                         </from>
                         <to>
-                            <image>ecom:latest</image>
+                            <image>main:latest</image>
                         </to>
                         <container>
                             <entrypoint>
@@ -731,8 +747,6 @@
                             <exclude>**/*IT*</exclude>
                             <exclude>**/*IntTest*</exclude>
                         </excludes>
-                        <!-- Fix tests at java 13+ https://github.com/reactor/BlockHound/issues/33 -->
-                        <argLine>@{argLine} -XX:+IgnoreUnrecognizedVMOptions -XX:+AllowRedefinitionToAddDeleteMethods</argLine>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -929,21 +943,21 @@
                     <optional>true</optional>
                 </dependency>
                 <dependency>
-                    <groupId>org.postgresql</groupId>
-                    <artifactId>postgresql</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.postgresql</groupId>
-                    <artifactId>r2dbc-postgresql</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.testcontainers</groupId>
-                    <artifactId>postgresql</artifactId>
-                    <scope>test</scope>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
                 </dependency>
             </dependencies>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <testExcludes>
+                                <testExclude>com/mycompany/myapp/config/PostgreSqlTestContainer.java</testExclude>
+                            </testExcludes>
+                        </configuration>
+                    </plugin>
 
                 </plugins>
                 <pluginManagement>
@@ -962,8 +976,7 @@
                                     <include>**/*IT*</include>
                                     <include>**/*IntTest*</include>
                                 </includes>
-                                <!-- Fix tests at java 13+ https://github.com/reactor/BlockHound/issues/33 -->
-                                <argLine>@{argLine} -XX:+IgnoreUnrecognizedVMOptions -XX:+AllowRedefinitionToAddDeleteMethods -Dspring.profiles.active=testdev</argLine>
+                                <argLine>@{argLine} -Dspring.profiles.active=testdev</argLine>
                             </configuration>
                             <executions>
                                 <execution>
@@ -987,12 +1000,12 @@
                             <configuration>
                                 <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                                 <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
-                                <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://localhost:5432/ECOM</url>
+                                <driver>org.h2.Driver</driver>
+                                <url>jdbc:h2:file:${project.build.directory}/h2db/db/main</url>
                                 <defaultSchemaName></defaultSchemaName>
-                                <username>ECOM</username>
+                                <username>main</username>
                                 <password></password>
-                                <referenceUrl>hibernate:spring:com.mycompany.myapp.domain?dialect=tech.jhipster.domain.util.FixedPostgreSQL10Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
+                                <referenceUrl>hibernate:spring:com.mycompany.myapp.domain?dialect=org.hibernate.dialect.H2Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                                 <verbose>true</verbose>
                                 <logging>debug</logging>
                                 <contexts>!test</contexts>
@@ -1019,9 +1032,8 @@
                                     <version>${validation-api.version}</version>
                                 </dependency>
                                 <dependency>
-                                    <groupId>tech.jhipster</groupId>
-                                    <artifactId>jhipster-framework</artifactId>
-                                    <version>${jhipster-dependencies.version}</version>
+                                    <groupId>com.h2database</groupId>
+                                    <artifactId>h2</artifactId>
                                 </dependency>
                             </dependencies>
                         </plugin>
@@ -1045,10 +1057,6 @@
                     <groupId>org.postgresql</groupId>
                     <artifactId>postgresql</artifactId>
                 </dependency>
-                <dependency>
-                    <groupId>org.postgresql</groupId>
-                    <artifactId>r2dbc-postgresql</artifactId>
-                </dependency>
             </dependencies>
             <build>
                 <pluginManagement>
@@ -1067,8 +1075,7 @@
                                     <include>**/*IT*</include>
                                     <include>**/*IntTest*</include>
                                 </includes>
-                                <!-- Fix tests at java 13+ https://github.com/reactor/BlockHound/issues/33 -->
-                                <argLine>@{argLine} -XX:+IgnoreUnrecognizedVMOptions -XX:+AllowRedefinitionToAddDeleteMethods -Dspring.profiles.active=testprod</argLine>
+                                <argLine>@{argLine} -Dspring.profiles.active=testprod</argLine>
                             </configuration>
                             <executions>
                                 <execution>
@@ -1093,9 +1100,9 @@
                                 <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
                                 <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://localhost:5432/ECOM</url>
+                                <url>jdbc:postgresql://localhost:5432/main</url>
                                 <defaultSchemaName></defaultSchemaName>
-                                <username>ECOM</username>
+                                <username>main</username>
                                 <password></password>
                                 <referenceUrl>hibernate:spring:com.mycompany.myapp.domain?dialect=tech.jhipster.domain.util.FixedPostgreSQL10Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                                 <verbose>true</verbose>
@@ -1225,22 +1232,6 @@
         </profile>
         <profile>
             <!--
-                Profile for tracing requests with Zipkin.
-            -->
-            <id>zipkin</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-starter-sleuth</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-sleuth-zipkin</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <!--
                 Profile for applying IDE-specific configuration.
                 At the moment it configures MapStruct and Hibernate JPA Metamodel Generator, which you need when working
                 with DTOs and entity filtering.
@@ -1326,21 +1317,6 @@
                     </plugins>
                 </pluginManagement>
             </build>
-        </profile>
-        <profile>
-            <activation>
-                <os>
-                    <family>mac</family>
-                    <arch>aarch64</arch>
-                </os>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-resolver-dns-native-macos</artifactId>
-                    <classifier>osx-aarch_64</classifier>
-                </dependency>
-            </dependencies>
         </profile>
         <!-- jhipster-needle-maven-add-profile -->
     </profiles>

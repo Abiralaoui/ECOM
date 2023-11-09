@@ -13,19 +13,9 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-eureka:
-  client:
-    enabled: false
-  instance:
-    appname: ECOM
-    instanceId: ECOM:${spring.application.instance-id:${random.value}}
-
 spring:
   application:
-    name: ECOM
-  cloud:
-    config:
-      enabled: false
+    name: main
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: test
@@ -36,17 +26,20 @@ spring:
     host: localhost
   main:
     allow-bean-definition-overriding: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   messages:
     basename: i18n/messages
   task:
     execution:
-      thread-name-prefix: ecom-task-
+      thread-name-prefix: main-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: ecom-scheduling-
+      thread-name-prefix: main-scheduling-
       pool:
         size: 20
   thymeleaf:
@@ -63,9 +56,9 @@ server:
 # ===================================================================
 jhipster:
   clientApp:
-    name: 'ecomApp'
+    name: 'mainApp'
   mail:
-    from: ECOM@localhost.com
+    from: main@localhost.com
     base-url: http://127.0.0.1:8080
   logging:
     # To test json console appender
